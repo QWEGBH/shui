@@ -1,0 +1,961 @@
+<<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧税务赋能乡村生态转化项目</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+        }
+
+        /* 全局猫咪鼠标样式 */
+        body {
+            cursor: url('https://placehold.co/32x32/FFE4B5/8B5A2B?text=喵'), auto;
+            background-color: #F5F0E1; /* 主色：米色 */
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* 容器通用样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #FFF8E7; /* 浅米色 */
+            box-shadow: 0 3px 12px rgba(139, 90, 43, 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.9rem 0;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo-img {
+            width: 54px;
+            height: 54px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 2px 6px rgba(139, 90, 43, 0.15);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8B5A2B; /* 暖棕色 */
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+
+        .nav-item a {
+            text-decoration: none;
+            color: #5D4037; /* 深棕色 */
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.3rem 0;
+            position: relative;
+        }
+
+        .nav-item a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #FFA500;
+            transition: width 0.3s;
+        }
+
+        .nav-item a:hover {
+            color: #FFA500; /* 强调色：浅橙色 */
+        }
+
+        .nav-item a:hover::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            background-color: #8B5A2B;
+            color: white;
+            border: none;
+            padding: 0.65rem 1.4rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: url('https://placehold.co/32x32/FFE4B5/8B5A2B?text=喵'), pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(139, 90, 43, 0.2);
+        }
+
+        .login-btn:hover {
+            background-color: #A0522D;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(139, 90, 43, 0.25);
+        }
+
+        /* 英雄区域 */
+        .hero {
+            padding: 4rem 0 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: #8B5A2B;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #5D4037;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 900px;
+            height: 420px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(139, 90, 43, 0.18);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-img:hover {
+            transform: scale(1.01);
+        }
+
+        /* 核心架构区域（固定2×2样式） */
+        .core-system {
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background-color: #FFF8E7;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(139, 90, 43, 0.12);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #8B5A2B;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #FFA500;
+            border-radius: 2px;
+        }
+
+        /* 核心设置：固定2列 */
+        .system-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .system-card {
+            background-color: white;
+            padding: 2rem 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(139, 90, 43, 0.08);
+            border-top: 5px solid #FFA500;
+            transition: all 0.3s ease;
+            min-height: 240px;
+        }
+
+        .system-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(139, 90, 43, 0.15);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #8B5A2B;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 600;
+        }
+
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(139, 90, 43, 0.1);
+        }
+
+        .card-content {
+            color: #5D4037;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* 政策归集模块（固定2×2格局） */
+        .policies-section {
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background-color: #FFF8E7;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(139, 90, 43, 0.12);
+        }
+
+        .policy-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            background-color: white;
+            border: 1px solid #E0D8C0;
+            color: #5D4037;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            cursor: url('https://placehold.co/32x32/FFE4B5/8B5A2B?text=喵'), pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background-color: #8B5A2B;
+            color: white;
+            border-color: #8B5A2B;
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: #FFA500;
+            color: #8B5A2B;
+        }
+
+        /* 政策卡片固定2×2核心设置 */
+        .policies-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 强制2列，固定2×2格局 */
+            gap: 2rem; /* 增大间距，强化2×2视觉分割 */
+        }
+
+        .policy-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(139, 90, 43, 0.08);
+            transition: all 0.3s ease;
+            min-height: 280px; /* 固定最小高度，避免卡片高度不一导致布局偏移 */
+        }
+
+        .policy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(139, 90, 43, 0.15);
+        }
+
+        .policy-header {
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid #F5F0E1;
+        }
+
+        .policy-title {
+            font-size: 1.25rem;
+            color: #8B5A2B;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .policy-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #9E9E9E;
+        }
+
+        .policy-content {
+            padding: 1.2rem 1.5rem 1.5rem;
+            color: #5D4037;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .policy-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #FFA500;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .policy-link:hover {
+            color: #FF8C00;
+            text-decoration: underline;
+        }
+
+        /* 留言板区域 */
+        .message-board {
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background-color: #FFF8E7;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(139, 90, 43, 0.12);
+        }
+
+        .message-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(139, 90, 43, 0.08);
+        }
+
+        .message-input {
+            padding: 1.1rem;
+            border: 1px solid #E0D8C0;
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .message-input:focus, .message-name:focus {
+            outline: none;
+            border-color: #FFA500;
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.1);
+        }
+
+        .message-name {
+            padding: 1rem;
+            border: 1px solid #E0D8C0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn {
+            background-color: #FFA500;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: url('https://placehold.co/32x32/FFE4B5/8B5A2B?text=喵'), pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #FF8C00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 165, 0, 0.25);
+        }
+
+        .message-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .message-item {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(139, 90, 43, 0.08);
+            transition: transform 0.3s;
+        }
+
+        .message-item:hover {
+            transform: translateX(5px);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .message-author {
+            font-weight: 600;
+            color: #8B5A2B;
+        }
+
+        .message-time {
+            color: #9E9E9E;
+        }
+
+        .message-content {
+            color: #5D4037;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* 快速导航区域 */
+        .quick-nav {
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background-color: #FFF8E7;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(139, 90, 43, 0.12);
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .nav-column h3 {
+            font-size: 1.3rem;
+            color: #8B5A2B;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #FFA500;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .nav-links li a {
+            color: #5D4037;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .nav-links li a:hover {
+            color: #FFA500;
+            transform: translateX(5px);
+        }
+
+        .contact-info {
+            color: #5D4037;
+            line-height: 2;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .wechat-qrcode {
+            margin-top: 1rem;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(139, 90, 43, 0.15);
+        }
+
+        /* 登录模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            font-size: 1.6rem;
+            color: #9E9E9E;
+            cursor: url('https://placehold.co/32x32/FFE4B5/8B5A2B?text=喵'), pointer;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #8B5A2B;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            margin-top: 1.5rem;
+        }
+
+        .login-input {
+            padding: 1rem;
+            border: 1px solid #E0D8C0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #FFA500;
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.1);
+        }
+
+        /* 页脚 */
+        .footer {
+            background-color: #8B5A2B;
+            color: white;
+            text-align: center;
+            padding: 2.5rem 5%;
+            margin-top: 5rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #FFA500, #FF8C00);
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* 响应式适配：小屏（≤768px）改为1列 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-img {
+                height: 280px;
+            }
+
+            /* 核心架构和政策归集在小屏均为1列 */
+            .system-grid, .policies-grid, .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .nav-column {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-img {
+                height: 220px;
+            }
+
+            .card-title, .policy-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <img src="https://placehold.co/54x54/FFA500/FFFFFF?text=税" alt="项目Logo" class="logo-img">
+                <span class="logo-text">乡税智枢·辅者先行</span>
+            </a>
+            <ul class="nav-menu">
+                 <li class="nav-item"><a href="index.html" class="active">首页</a></li>
+                <li class="nav-item"><a href="项目简介.html">项目简介</a></li>
+                <li class="nav-item"><a href="项目背景.html">项目背景</a></li>
+                <li class="nav-item"><a href="项目介绍.html">项目介绍</a></li>
+                <li class="nav-item"><a href="发展规划.html">发展规划</a></li>
+                <li class="nav-item"><a href="市场推广.html">市场推广</a></li>
+            </ul>
+            <button class="login-btn" id="loginBtn">登录</button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">智慧税务赋能乡村生态转化项目</h1>
+            <p class="hero-subtitle">以“1+2+3+4”系统赋能体系为核心，构建“政校村协同、数据驱动、价值闭环”的生态型乡村税务服务平台，实现“三降三升”目标，助力乡村振兴</p>
+            <img src="https://placehold.co/900x420/FFE4B5/8B5A2B?text=乡村智慧税务场景" alt="乡村智慧税务示意图" class="hero-img">
+        </div>
+    </section>
+
+    <!-- 核心架构区域（固定2×2） -->
+    <section class="core-system container">
+        <h2 class="section-title">核心架构：“1+2+3+4”系统赋能体系</h2>
+        <div class="system-grid">
+            <!-- 1个核心目标 -->
+            <div class="system-card">
+                <h3 class="card-title">
+                    <img src="https://placehold.co/36x36/FFA500/FFFFFF?text=1" alt="图标" class="card-icon">
+                    一个核心目标
+                </h3>
+                <p class="card-content">实现“三降三升”赋能乡村发展：<br>
+                <b>三降</b>：降低乡村办税时间、降低申报错误率、降低税务合规风险；<br>
+                <b>三升</b>：提升惠农政策直达率、提升乡村税务自主服务能力、提升产业规范与价值创造能力。</p>
+            </div>
+
+            <!-- 2支关键队伍 -->
+            <div class="system-card">
+                <h3 class="card-title">
+                    <img src="https://placehold.co/36x36/FFA500/FFFFFF?text=2" alt="图标" class="card-icon">
+                    二支关键队伍
+                </h3>
+                <p class="card-content"><b>大学生专业赋能队</b>：负责政策梳理、工具开发、专业培训等核心工作；<br>
+                <b>乡村本土辅导员队</b>：从村支两委、致富带头人中选拔，负责政策传达、基础辅导、需求收集，破解“水土不服”问题。</p>
+            </div>
+
+            <!-- 3大服务模块 -->
+            <div class="system-card">
+                <h3 class="card-title">
+                    <img src="https://placehold.co/36x36/FFA500/FFFFFF?text=3" alt="图标" class="card-icon">
+                    三大服务模块
+                </h3>
+                <p class="card-content"><b>乡税易懂</b>：政策转化与精准推送，含场景化政策库、方言版政策包；<br>
+                <b>乡税易学</b>：线上线下辅导矩阵，含村级辅导点、极简版办税小程序；<br>
+                <b>乡税易兴</b>：产业赋能与合规提升，含税务信用贷对接、品牌认证辅助。</p>
+            </div>
+
+            <!-- 4套保障机制 -->
+            <div class="system-card">
+                <h3 class="card-title">
+                    <img src="https://placehold.co/36x36/FFA500/FFFFFF?text=4" alt="图标" class="card-icon">
+                    四套保障机制
+                </h3>
+                <p class="card-content"><b>政校村三方协同机制</b>：整合税务部门、高校、村委会资源；<br>
+                <b>本土辅导员培养激励机制</b>：三阶培训+多元激励，稳定服务队伍；<br>
+                <b>数字化工具迭代机制</b>：同步政策更新与主体需求，优化工具功能；<br>
+                <b>价值量化与证据留存机制</b>：记录服务数据，验证项目成效。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 政策归集模块（固定2×2格局） -->
+    <section class="policies-section container">
+        <h2 class="section-title">乡村税务相关政策归集</h2>
+        <div class="policy-filters">
+            <button class="filter-btn active">全部政策</button>
+            <button class="filter-btn">惠农税收减免</button>
+            <button class="filter-btn">乡村产业扶持</button>
+            <button class="filter-btn">小微企业优惠</button>
+            <button class="filter-btn">最新政策</button>
+        </div>
+        <div class="policies-grid">
+            <!-- 政策卡片1 -->
+            <div class="policy-card">
+                <div class="policy-header">
+                    <h3 class="policy-title">关于延续实施支持农村集体经济组织发展有关税收政策的通知</h3>
+                    <div class="policy-meta">
+                        <span>国家税务总局</span>
+                        <span>2025-03-15</span>
+                    </div>
+                </div>
+                <div class="policy-content">
+                    通知明确，对农村集体经济组织销售农产品等收入免征增值税，对符合条件的农村集体经济组织承受土地、房屋权属用于农业生产的，免征契税。政策执行期限延长至2027年底。
+                    <a href="#" class="policy-link">查看详情 →</a>
+                </div>
+            </div>
+
+            <!-- 政策卡片2 -->
+            <div class="policy-card">
+                <div class="policy-header">
+                    <h3 class="policy-title">乡村振兴重点产业税收优惠政策指引（2025年版）</h3>
+                    <div class="policy-meta">
+                        <span>财政部 税务总局</span>
+                        <span>2025-01-20</span>
+                    </div>
+                </div>
+                <div class="policy-content">
+                    指引涵盖农业生产、农产品加工、乡村旅游、农村电商等12个重点领域，梳理了48项支持乡村振兴的税收优惠政策，附具体申报流程和案例解析。
+                    <a href="#" class="policy-link">查看详情 →</a>
+                </div>
+            </div>
+
+            <!-- 政策卡片3 -->
+            <div class="policy-card">
+                <div class="policy-header">
+                    <h3 class="policy-title">关于进一步支持农民专业合作社发展有关税收政策的公告</h3>
+                    <div class="policy-meta">
+                        <span>国家税务总局</span>
+                        <span>2024-11-05</span>
+                    </div>
+                </div>
+                <div class="policy-content">
+                    公告明确农民专业合作社年销售额不超过500万元的部分，免征增值税；合作社成员从合作社取得的盈余返还收入，暂免征收个人所得税。
+                    <a href="#" class="policy-link">查看详情 →</a>
+                </div>
+            </div>
+
+            <!-- 政策卡片4 -->
+            <div class="policy-card">
+                <div class="policy-header">
+                    <h3 class="policy-title">农村个体工商户税收优惠政策实施细则</h3>
+                    <div class="policy-meta">
+                        <span>国家税务总局</span>
+                        <span>2024-09-12</span>
+                    </div>
+                </div>
+                <div class="policy-content">
+                    细则规定农村个体工商户月销售额不超过10万元的，免征增值税；实行简易申报流程，可通过村级服务点代办税务登记和申报，简化资料要求。
+                    <a href="#" class="policy-link">查看详情 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 留言板区域 -->
+    <section class="message-board container">
+        <h2 class="section-title">留言板</h2>
+        <form class="message-form" id="messageForm">
+            <input type="text" class="message-name" placeholder="请输入您的姓名/单位" required>
+            <textarea class="message-input" rows="5" placeholder="请输入您的留言（如项目咨询、需求建议等）" required></textarea>
+            <button type="submit" class="submit-btn">提交留言</button>
+        </form>
+        <div class="message-list" id="messageList">
+            <!-- 留言将通过JS动态添加 -->
+        </div>
+    </section>
+
+    <!-- 快速导航区域 -->
+    <section class="quick-nav container">
+        <h2 class="section-title">快速导航</h2>
+        <div class="nav-grid">
+            <!-- 导航链接列（已按要求修改） -->
+            <div class="nav-column">
+                <h3>主要导航</h3>
+                <ul class="nav-links">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="项目简介.html">项目简介</a></li>
+                    <li><a href="项目背景.html">项目背景</a></li>
+                    <li><a href="项目介绍.html">项目介绍</a></li>
+                    <li><a href="发展规划.html">发展规划</a></li>
+                    <li><a href="市场推广.html">市场推广</a></li>
+                    <li><a href="#">用户手册</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </div>
+
+            <!-- 联系信息列 -->
+            <div class="nav-column">
+                <h3>联系我们</h3>
+                <div class="contact-info">
+                    <p>咨询电话: 400-123</p>
+                    <p>邮箱: support@xiangcun.co</p>
+                    <p>地址: XX市XX区乡村局</p>
+                </div>
+            </div>
+
+            <!-- 关注我们列 -->
+            <div class="nav-column">
+                <h3>关注我们</h3>
+                <div class="contact-info">
+                    <p>扫描二维码，关注微信小程序</p>
+                    <img src="https://placehold.co/120x120/FFA500/FFFFFF?text=小程序" alt="微信小程序二维码" class="wechat-qrcode">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 登录模态框 -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 style="color: #8B5A2B; text-align: center; margin-bottom: 1rem;">用户登录</h2>
+            <form class="login-form" id="loginForm">
+                <input type="text" class="login-input" placeholder="请输入账号" required>
+                <input type="password" class="login-input" placeholder="请输入密码" required>
+                <button type="submit" class="login-btn" style="width: 100%;">登录</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 登录模态框控制
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeModal = document.getElementById('closeModal');
+        const loginForm = document.getElementById('loginForm');
+
+        loginBtn.addEventListener('click', () => {
+            loginModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeLoginModal() {
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeModal.addEventListener('click', closeLoginModal);
+        loginModal.addEventListener('click', (e) => e.target === loginModal && closeLoginModal());
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert(`欢迎您，${loginForm[0].value}！`);
+            closeLoginModal();
+            loginForm.reset();
+        });
+
+        // 留言板功能
+        const messageForm = document.getElementById('messageForm');
+        const messageList = document.getElementById('messageList');
+        let messages = JSON.parse(localStorage.getItem('ruralTaxMessages')) || [];
+
+        function renderMessages() {
+            messageList.innerHTML = messages.length === 0 
+                ? '<p style="text-align: center; color: #9E9E9E; padding: 1.5rem;">暂无留言，欢迎您留下宝贵意见！</p>'
+                : '';
+            
+            messages.sort((a, b) => new Date(b.time) - new Date(a.time))
+                .forEach(msg => {
+                    const item = document.createElement('div');
+                    item.className = 'message-item';
+                    item.innerHTML = `
+                        <div class="message-header">
+                            <span class="message-author">${msg.name}</span>
+                            <span class="message-time">${msg.time}</span>
+                        </div>
+                        <div class="message-content">${msg.content}</div>
+                    `;
+                    messageList.appendChild(item);
+                });
+        }
+
+        messageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            messages.push({
+                name: messageForm[0].value,
+                content: messageForm[1].value,
+                time: new Date().toLocaleString()
+            });
+            localStorage.setItem('ruralTaxMessages', JSON.stringify(messages));
+            renderMessages();
+            messageForm.reset();
+            alert('留言提交成功！');
+        });
+
+        // 政策筛选功能
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // 页面加载时渲染留言
+        window.addEventListener('load', renderMessages);
+    </script>
+</body>
+</html>
