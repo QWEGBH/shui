@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政策查询 - 乡税智枢</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E6D2A7', // 米色主色调
+                        secondary: '#D4B483', // 浅棕色辅助色
+                        accent: '#C28E5D', // 暖棕色强调色
+                        neutral: '#F9F5EF', // 浅米色背景
+                        dark: '#7D5A3F', // 深棕色文字
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .policy-btn {
+                @apply bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm md:text-base;
+            }
+            .policy-card {
+                @apply bg-white rounded-xl p-5 shadow-md border border-primary/30 transition-all hover:shadow-lg;
+            }
+            .policy-tag {
+                @apply bg-accent/10 text-accent text-xs px-2 py-1 rounded-full inline-block mt-1 mr-2;
+            }
+            .nav-active {
+                @apply text-accent font-medium;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral text-dark font-sans">
+    <!-- 完整导航栏（保留，与整体风格统一） -->
+    <header class="sticky top-0 z-50 bg-primary/95 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <i class="fa fa-home text-accent text-2xl"></i>
+                <span class="text-xl font-bold text-dark">乡税智枢</span>
+            </a>
+            
+            <!-- 桌面端导航（标注当前页） -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="text-dark hover:text-accent transition-colors">首页</a>
+                <a href="核心服务.html" class="text-dark hover:text-accent transition-colors">核心服务</a>
+                <a href="实用工具.html" class="text-dark hover:text-accent transition-colors">实用工具</a>
+                <a href="政策查询.html" class="nav-active">政策查询</a>
+                <a href="辅导员对接.html" class="text-dark hover:text-accent transition-colors">辅导员对接</a>
+                <a href="关于我们.html" class="text-dark hover:text-accent transition-colors">关于我们</a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-dark text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单（完整保留） -->
+        <div id="mobileMenu" class="md:hidden hidden bg-primary border-t border-secondary/30">
+            <div class="container mx-auto px-4 py-2 flex flex-col gap-3">
+                <a href="index.html" class="py-2 text-dark hover:text-accent transition-colors">首页</a>
+                <a href="核心服务.html" class="py-2 text-dark hover:text-accent transition-colors">核心服务</a>
+                <a href="实用工具.html" class="py-2 text-dark hover:text-accent transition-colors">实用工具</a>
+                <a href="政策查询.html" class="py-2 nav-active">政策查询</a>
+                <a href="辅导员对接.html" class="py-2 text-dark hover:text-accent transition-colors">辅导员对接</a>
+                <a href="关于我们.html" class="py-2 text-dark hover:text-accent transition-colors">关于我们</a>
+                <a href="counselor.html" class="py-2 bg-accent/10 text-accent font-medium px-2 rounded">紧急咨询：400-123-4567</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 面包屑导航（保留，增强连贯性） -->
+    <section class="bg-white py-4 border-b border-primary/30">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-dark/70">
+                <a href="index.html" class="hover:text-accent transition-colors">首页</a>
+                <i class="fa fa-angle-right mx-2 text-accent"></i>
+                <span class="text-accent">政策查询</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 政策查询核心入口（首屏直达，直接能用） -->
+    <section class="py-8 bg-gradient-to-b from-primary to-neutral">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-6">
+                <h2 class="text-[clamp(1.5rem,3vw,1.8rem)] font-bold text-dark mb-2">找政策：按类型查、按身份查，看不懂有方言版</h2>
+                <p class="text-dark/70 text-sm md:text-base">种庄稼、开合作社、办企业，都能快速找到自己能享的税收优惠</p>
+            </div>
+
+            <!-- 政策搜索+筛选（核心功能，直接操作） -->
+            <div class="max-w-3xl mx-auto bg-white p-5 rounded-xl shadow-md border border-primary/30 mb-8">
+                <div class="flex flex-col md:flex-row gap-3">
+                    <input type="text" placeholder="输入政策关键词（如：农产品免税、合作社分红）" 
+                        class="flex-1 px-4 py-3 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                    <select class="px-4 py-3 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                        <option value="">全部政策类型</option>
+                        <option value="vat">增值税优惠</option>
+                        <option value="income-tax">所得税优惠</option>
+                        <option value="exemption">免税政策</option>
+                        <option value="startup">创业扶持</option>
+                    </select>
+                    <select class="px-4 py-3 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                        <option value="">全部经营身份</option>
+                        <option value="family">农户/家庭农场</option>
+                        <option value="coop">农民专业合作社</option>
+                        <option value="enterprise">农业企业</option>
+                        <option value="individual">个体工商户（农家乐等）</option>
+                    </select>
+                    <button class="policy-btn whitespace-nowrap">
+                        <i class="fa fa-search"></i> 查政策
+                    </button>
+                </div>
+                <!-- 热门搜索标签（快速点击） -->
+                <div class="flex flex-wrap gap-2 mt-4 text-xs">
+                    <a href="policy-detail.html?id=farm-product" class="bg-neutral hover:bg-primary/30 px-3 py-1 rounded transition-colors">自产农产品免税</a>
+                    <a href="policy-detail.html?id=coop-dividend" class="bg-neutral hover:bg-primary/30 px-3 py-1 rounded transition-colors">合作社分红免税</a>
+                    <a href="policy-detail.html?id=micro-enterprise" class="bg-neutral hover:bg-primary/30 px-3 py-1 rounded transition-colors">小微企业所得税减半</a>
+                    <a href="policy-detail.html?id=startup-deduction" class="bg-neutral hover:bg-primary/30 px-3 py-1 rounded transition-colors">返乡创业税收扣减</a>
+                    <a href="policy-detail.html?id=agricultural-machinery" class="bg-neutral hover:bg-primary/30 px-3 py-1 rounded transition-colors">农机购置抵税</a>
+                </div>
+            </div>
+
+            <!-- 政策快速入口（按主体分类，直接匹配） -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#family-policy" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg border border-primary/30 hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-home text-accent text-2xl mb-2"></i>
+                    <span class="text-center text-sm font-medium">农户/家庭农场</span>
+                </a>
+                <a href="#coop-policy" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg border border-primary/30 hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-users text-accent text-2xl mb-2"></i>
+                    <span class="text-center text-sm font-medium">合作社</span>
+                </a>
+                <a href="#enterprise-policy" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg border border-primary/30 hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-building text-accent text-2xl mb-2"></i>
+                    <span class="text-center text-sm font-medium">农业企业</span>
+                </a>
+                <a href="#individual-policy" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg border border-primary/30 hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-cutlery text-accent text-2xl mb-2"></i>
+                    <span class="text-center text-sm font-medium">个体工商户</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. 热门政策推荐（高频需求，直接查看） -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="mb-8">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3 flex items-center gap-2">
+                    <i class="fa fa-fire text-accent"></i> 大家都在查的政策
+                </h2>
+                <p class="text-dark/70 text-sm">这些政策用得多、问得多，点击就能看详情、下手册</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 自产农产品免征增值税 -->
+                <div class="policy-card">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-dark">自产农产品免征增值税</h3>
+                        <span class="policy-tag">农户/农场</span>
+                    </div>
+                    <div class="text-dark/70 text-sm mb-4 space-y-2">
+                        <p>✅ 适用：自己种的粮食、水果、蔬菜、茶叶等</p>
+                        <p>✅ 好处：销售时不用交增值税，开票选“免税”就行</p>
+                        <p>❌ 注意：外购再卖的不算，需要保留种植证明</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="policy-detail.html?id=farm-product" class="policy-btn flex-1 md:flex-none">
+                            <i class="fa fa-file-text-o"></i> 看详情
+                        </a>
+                        <a href="guide-download.html?type=farm-product" class="bg-white hover:bg-white/90 text-accent border border-accent px-3 py-1.5 rounded-lg font-medium transition-colors text-xs flex items-center justify-center gap-1">
+                            <i class="fa fa-download"></i> 方言手册
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 小微企业所得税减半 -->
+                <div class="policy-card">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-dark">小微企业所得税减半</h3>
+                        <span class="policy-tag">农业企业</span>
+                    </div>
+                    <div class="text-dark/70 text-sm mb-4 space-y-2">
+                        <p>✅ 适用：年利润300万以内的农业公司、合作社</p>
+                        <p>✅ 好处：所得税按5%交（正常25%），能省不少钱</p>
+                        <p>✅ 操作：申报时系统自动减免，不用额外申请</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="policy-detail.html?id=micro-enterprise" class="policy-btn flex-1 md:flex-none">
+                            <i class="fa fa-file-text-o"></i> 看详情
+                        </a>
+                        <a href="tools.html#tax-calculator" class="bg-white hover:bg-white/90 text-accent border border-accent px-3 py-1.5 rounded-lg font-medium transition-colors text-xs flex items-center justify-center gap-1">
+                            <i class="fa fa-calculator"></i> 算省多少钱
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 合作社成员分红免税 -->
+                <div class="policy-card">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-dark">合作社成员分红免税</h3>
+                        <span class="policy-tag">合作社</span>
+                    </div>
+                    <div class="text-dark/70 text-sm mb-4 space-y-2">
+                        <p>✅ 适用：农民专业合作社给成员分的红利</p>
+                        <p>✅ 好处：成员不用交个人所得税，合作社不用扣税</p>
+                        <p>✅ 操作：需要提前到税务局备案，保留分红清单</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="policy-detail.html?id=coop-dividend" class="policy-btn flex-1 md:flex-none">
+                            <i class="fa fa-file-text-o"></i> 看详情
+                        </a>
+                        <a href="operation-video.html?type=coop-record" class="bg-white hover:bg-white/90 text-accent border border-accent px-3 py-1.5 rounded-lg font-medium transition-colors text-xs flex items-center justify-center gap-1">
+                            <i class="fa fa-play"></i> 备案教程
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 按主体分类政策（精准匹配，直接找自己的） -->
+    <section class="py-12 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="mb-8">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3 flex items-center gap-2">
+                    <i class="fa fa-users text-accent"></i> 按你的经营身份找政策
+                </h2>
+                <p class="text-dark/70 text-sm">不用翻太多，选自己的身份，就能看到所有能享的政策</p>
+            </div>
+
+            <!-- 农户/家庭农场 -->
+            <div id="family-policy" class="mb-10">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                        <i class="fa fa-home text-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-dark">农户/家庭农场可享政策</h3>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="policy-detail.html?id=farm-product" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">自产农产品免税</h4>
+                        <p class="text-dark/70 text-xs">种植、养殖的农产品销售，免增值税</p>
+                    </a>
+                    <a href="policy-detail.html?id=agricultural-machinery" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">农机购置抵税</h4>
+                        <p class="text-dark/70 text-xs">买拖拉机、收割机等，可抵增值税</p>
+                    </a>
+                    <a href="policy-detail.html?id=family-farm" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">家庭农场所得税优惠</h4>
+                        <p class="text-dark/70 text-xs">符合条件的，所得税按20%交</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 农民专业合作社 -->
+            <div id="coop-policy" class="mb-10">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                        <i class="fa fa-users text-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-dark">农民专业合作社可享政策</h3>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="policy-detail.html?id=coop-dividend" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">成员分红免税</h4>
+                        <p class="text-dark/70 text-xs">给成员的分红，免个人所得税</p>
+                    </a>
+                    <a href="policy-detail.html?id=coop-sales" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">销售社员产品免税</h4>
+                        <p class="text-dark/70 text-xs">销售本社成员的农产品，免增值税</p>
+                    </a>
+                    <a href="policy-detail.html?id=coop-gear" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">农机销售免税</h4>
+                        <p class="text-dark/70 text-xs">给社员销售农机，免增值税</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 农业企业 -->
+            <div id="enterprise-policy" class="mb-10">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                        <i class="fa fa-building text-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-dark">农业企业可享政策</h3>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="policy-detail.html?id=micro-enterprise" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">小微企业所得税减半</h4>
+                        <p class="text-dark/70 text-xs">年利润300万内，所得税按5%交</p>
+                    </a>
+                    <a href="policy-detail.html?id=agri-process" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">农产品初加工免税</h4>
+                        <p class="text-dark/70 text-xs">茶叶、面粉等初加工，免企业所得税</p>
+                    </a>
+                    <a href="policy-detail.html?id=rd-deduction" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">研发费用加计扣除</h4>
+                        <p class="text-dark/70 text-xs">农业研发费用，可多扣75%抵税</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 个体工商户 -->
+            <div id="individual-policy">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                        <i class="fa fa-cutlery text-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-dark">个体工商户（农家乐/小店）可享政策</h3>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="policy-detail.html?id=individual-vat" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">小规模增值税减免</h4>
+                        <p class="text-dark/70 text-xs">月销10万内（季度30万）免增值税</p>
+                    </a>
+                    <a href="policy-detail.html?id=individual-fixed" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">定额税调整</h4>
+                        <p class="text-dark/70 text-xs">经营困难可申请调低定额税</p>
+                    </a>
+                    <a href="policy-detail.html?id=startup-deduction" class="bg-white p-4 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                        <h4 class="font-medium text-dark mb-2">返乡创业税收扣减</h4>
+                        <p class="text-dark/70 text-xs">返乡创业3年内，每年可扣1.2万税</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 方言版政策包（重点突出，直接下载） -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">方言版政策包：听不懂普通话？用家乡话学政策</h2>
+                <p class="text-dark/70 text-sm">视频、音频、图文手册都有方言版，下载后离线也能看</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-neutral p-6 rounded-xl border border-primary/30">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-dark mb-4 flex items-center gap-2">
+                            <i class="fa fa-headphones text-accent"></i> 方言音频政策
+                        </h3>
+                        <p class="text-dark/70 text-sm mb-4">收录10个常用政策的方言讲解，用手机就能听，时长3-5分钟</p>
+                        <div class="space-y-3">
+                            <a href="guide-download.html?type=audio-farm" class="block bg-white p-3 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-medium text-dark text-sm">农产品免税政策（方言音频）</h4>
+                                        <p class="text-dark/60 text-xs">时长：3分20秒 | 格式：MP3</p>
+                                    </div>
+                                    <i class="fa fa-download text-accent"></i>
+                                </div>
+                            </a>
+                            <a href="guide-download.html?type=audio-coop" class="block bg-white p-3 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-medium text-dark text-sm">合作社分红免税（方言音频）</h4>
+                                        <p class="text-dark/60 text-xs">时长：4分15秒 | 格式：MP3</p>
+                                    </div>
+                                    <i class="fa fa-download text-accent"></i>
+                                </div>
+                            </a>
+                            <a href="guide-download.html?type=audio-all" class="block bg-accent/10 p-3 rounded-lg text-accent hover:bg-accent/20 transition-colors text-center">
+                                <i class="fa fa-download mr-1"></i> 下载全部方言音频
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-dark mb-4 flex items-center gap-2">
+                            <i class="fa fa-file-image-o text-accent"></i> 方言图文手册
+                        </h3>
+                        <p class="text-dark/70 text-sm mb-4">漫画+方言文字，把政策变成“农家话”，可打印张贴</p>
+                        <div class="space-y-3">
+                            <a href="guide-download.html?type=pdf-farm" class="block bg-white p-3 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-medium text-dark text-sm">农户常用政策手册（方言版）</h4>
+                                        <p class="text-dark/60 text-xs">页数：12页 | 格式：PDF</p>
+                                    </div>
+                                    <i class="fa fa-download text-accent"></i>
+                                </div>
+                            </a>
+                            <a href="guide-download.html?type=pdf-coop" class="block bg-white p-3 rounded-lg border border-primary/30 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-medium text-dark text-sm">合作社政策手册（方言版）</h4>
+                                        <p class="text-dark/60 text-xs">页数：15页 | 格式：PDF</p>
+                                    </div>
+                                    <i class="fa fa-download text-accent"></i>
+                                </div>
+                            </a>
+                            <a href="guide-download.html?type=pdf-all" class="block bg-accent/10 p-3 rounded-lg text-accent hover:bg-accent/20 transition-colors text-center">
+                                <i class="fa fa-download mr-1"></i> 下载全部方言手册
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 政策申报帮助（解决“不会办”，直接对接） -->
+    <section class="py-12 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">政策不会申报？帮你解决</h2>
+                <p class="text-dark/70 text-sm">找到政策但不知道怎么申请？可下载教程或找辅导员帮办</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                <a href="operation-guide.html?type=policy-apply" class="bg-white p-5 rounded-xl border border-primary/30 hover:shadow-md transition-shadow flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-play-circle text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-dark mb-2">看申报教程</h3>
+                    <p class="text-dark/70 text-xs mb-3">一步一图教你填表单、传材料，还有方言视频</p>
+                    <span class="text-accent text-sm hover:underline">立即查看 <i class="fa fa-angle-right ml-1"></i></span>
+                </a>
+                <a href="guide-download.html?type=apply-form" class="bg-white p-5 rounded-xl border border-primary/30 hover:shadow-md transition-shadow flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-file-text-o text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-dark mb-2">下载申报表格</h3>
+                    <p class="text-dark/70 text-xs mb-3">常用政策的申报表格，带填写示例，直接打印填写</p>
+                    <span class="text-accent text-sm hover:underline">立即下载 <i class="fa fa-angle-right ml-1"></i></span>
+                </a>
+                <a href="counselor.html" class="bg-white p-5 rounded-xl border border-primary/30 hover:shadow-md transition-shadow flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-user-o text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-dark mb-2">找辅导员帮办</h3>
+                    <p class="text-dark/70 text-xs mb-3">辅导员上门教你申报，材料不全也能帮你整理</p>
+                    <span class="text-accent text-sm hover:underline">立即联系 <i class="fa fa-angle-right ml-1"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 政策咨询入口（固定底部，随时求助） -->
+    <div class="fixed bottom-0 left-0 right-0 bg-accent text-white py-3 shadow-lg z-40">
+        <div class="container mx-auto px-4 flex flex-wrap items-center justify-between">
+            <div class="flex items-center gap-2 mb-2 md:mb-0">
+                <i class="fa fa-question-circle text-xl"></i>
+                <div>
+                    <p class="text-sm">政策看不懂、不会报？找辅导员</p>
+                    <p class="font-bold">400-123-4567（7×24小时）</p>
+                </div>
+            </div>
+            <a href="counselor.html" class="bg-white text-accent px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 w-full md:w-auto">
+                <i class="fa fa-user-o"></i> 立即咨询
+            </a>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-20 right-6 bg-dark hover:bg-dark/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible z-30">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- 底部区域（完整保留） -->
+    <footer class="bg-dark text-white py-12 pt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa fa-home text-primary"></i>
+                        <span>乡税智枢</span>
+                    </h3>
+                    <p class="text-white/70 mb-4">乡村智慧税务服务平台，让税务服务更贴近乡村、更便捷高效</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white/70 hover:text-primary transition-colors">首页</a></li>
+                        <li><a href="核心服务.html" class="text-white/70 hover:text-primary transition-colors">核心服务</a></li>
+                        <li><a href="实用工具.html" class="text-white/70 hover:text-primary transition-colors">实用工具</a></li>
+                        <li><a href="政策查询.html" class="text-white/70 hover:text-primary transition-colors">政策查询</a></li>
+                        <li><a href="辅导员对接.html" class="text-white/70 hover:text-primary transition-colors">辅导员对接</a></li>
+                        <li><a href="关于我们.html" class="text-white/70 hover:text-primary transition-colors">关于我们</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">服务支持</h4>
+                    <ul class="space-y-2">
+                        <li><a href="faq.html" class="text-white/70 hover:text-primary transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-white/70 hover:text-primary transition-colors">意见反馈</a></li>
+                        <li><a href="service-terms.html" class="text-white/70 hover:text-primary transition-colors">服务条款</a></li>
+                        <li><a href="privacy.html" class="text-white/70 hover:text-primary transition-colors">隐私政策</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">联系我们</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-phone"></i>
+                            <span>400-123-4567</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-envelope-o"></i>
+                            <span>service@xiangshuizhishu.com</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-map-marker"></i>
+                            <span>陕西省西安市西京学院会计学院</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
+                <p>© 2025 乡税智枢 - 乡村智慧税务服务平台 版权所有 | 陕ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') 
+                ? '<i class="fa fa-bars"></i>' 
+                : '<i class="fa fa-times"></i>';
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动（锚点跳转）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
+                    }
+                    
+                    // 计算目标位置（避开底部固定栏）
+                    const targetTop = targetElement.offsetTop - 80;
+                    window.scrollTo({
+                        top: targetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
