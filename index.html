@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乡税智枢 - 乡村税务服务平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E6D2A7', // 米色主色调
+                        secondary: '#D4B483', // 浅棕色辅助色
+                        accent: '#C28E5D', // 暖棕色强调色
+                        neutral: '#F9F5EF', // 浅米色背景
+                        dark: '#7D5A3F', // 深棕色文字
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            }
+            .service-tag {
+                @apply bg-accent/10 text-accent text-xs px-2 py-1 rounded-full inline-block mt-2;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral text-dark font-sans">
+    <!-- 导航栏 - 新增首页选项 -->
+    <header class="sticky top-0 z-50 bg-primary/95 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2">
+                <i class="fa fa-home text-accent text-2xl"></i>
+                <span class="text-xl font-bold text-dark">乡税智枢</span>
+            </a>
+            
+            <!-- 桌面端导航 - 新增首页选项 -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="text-accent font-medium">首页</a>
+                <a href="核心服务.html" class="text-dark hover:text-accent transition-colors">核心服务</a>
+                <a href="实用工具.html" class="text-dark hover:text-accent transition-colors">实用工具</a>
+                <a href="政策查询.html" class="text-dark hover:text-accent transition-colors">政策查询</a>
+                <a href="辅导员对接.html" class="text-dark hover:text-accent transition-colors">辅导员对接</a>
+                <a href="关于我们.html" class="text-dark hover:text-accent transition-colors">关于我们</a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-dark text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 - 新增首页选项 -->
+        <div id="mobileMenu" class="md:hidden hidden bg-primary border-t border-secondary/30">
+            <div class="container mx-auto px-4 py-2 flex flex-col gap-3">
+                <a href="index.html" class="py-2 text-accent font-medium">首页</a>
+                <a href="核心服务.html" class="py-2 text-dark hover:text-accent transition-colors">核心服务</a>
+                <a href="实用工具.html" class="py-2 text-dark hover:text-accent transition-colors">实用工具</a>
+                <a href="政策查询.html" class="py-2 text-dark hover:text-accent transition-colors">政策查询</a>
+                <a href="辅导员对接.html" class="py-2 text-dark hover:text-accent transition-colors">辅导员对接</a>
+                <a href="关于我们.html" class="py-2 text-dark hover:text-accent transition-colors">关于我们</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner区域 -->
+    <section class="bg-gradient-to-b from-primary to-neutral py-16 md:py-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+            <div class="w-full md:w-1/2 space-y-6">
+                <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-dark leading-tight text-shadow">
+                    智慧税务进乡村<br>
+                    <span class="text-accent">便民服务零距离</span>
+                </h1>
+                <p class="text-lg md:text-xl text-dark/80">
+                    为家庭经营、合作经营、企业经营类主体提供政策解读、操作辅导、产业赋能全链条税务服务
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#service" class="bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center gap-2">
+                        <i class="fa fa-handshake-o"></i> 立即体验
+                    </a>
+                    <a href="#counselor" class="bg-white hover:bg-white/90 text-accent border border-accent px-6 py-3 rounded-lg font-medium transition-colors flex items-center gap-2">
+                        <i class="fa fa-user-o"></i> 联系辅导员
+                    </a>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2">
+                <img src="placeholder-banner.png" alt="乡村智慧税务服务" class="w-full h-auto rounded-xl shadow-lg" />
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心服务区域 - 优化版 -->
+    <section id="service" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">三大核心服务模块</h2>
+                <p class="text-dark/70 max-w-2xl mx-auto">覆盖"政策-操作-产业"全链条，满足不同乡村经营主体的税务服务需求，让办税更简单、更省心</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 乡税易懂 - 优化版 -->
+                <a href="policy-interpret.html" class="card-hover bg-neutral rounded-xl p-6 shadow-md border border-primary/30 flex flex-col h-full">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-file-text-o text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">乡税易懂</h3>
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <span class="service-tag">方言政策包</span>
+                        <span class="service-tag">案例解读</span>
+                        <span class="service-tag">精准推送</span>
+                    </div>
+                    <p class="text-dark/70 mb-6 flex-grow">
+                        把复杂的税收政策转化为通俗易懂的语言，提供方言音频、图文解读、常见问题解答，
+                        根据您的经营类型精准推送适用政策，确保优惠政策看得懂、用得上、不浪费。
+                    </p>
+                    <div class="flex items-center text-accent hover:text-accent/80 transition-colors mt-auto">
+                        <span>立即查看</span>
+                        <i class="fa fa-arrow-right ml-2"></i>
+                    </div>
+                </a>
+                
+                <!-- 乡税易学 - 优化版 -->
+                <a href="operation-guide.html" class="card-hover bg-neutral rounded-xl p-6 shadow-md border border-primary/30 flex flex-col h-full">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-laptop text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">乡税易学</h3>
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <span class="service-tag">一步一图</span>
+                        <span class="service-tag">视频教程</span>
+                        <span class="service-tag">线下辅导</span>
+                    </div>
+                    <p class="text-dark/70 mb-6 flex-grow">
+                        提供极简版办税指南，用农村群众看得懂的步骤图解、方言视频，
+                        配合村级辅导点的手把手教学，轻松掌握发票开具、申报纳税、优惠申请等实操技能。
+                    </p>
+                    <div class="flex items-center text-accent hover:text-accent/80 transition-colors mt-auto">
+                        <span>学习教程</span>
+                        <i class="fa fa-arrow-right ml-2"></i>
+                    </div>
+                </a>
+                
+                <!-- 乡税易兴 - 优化版 -->
+                <a href="industry-support.html" class="card-hover bg-neutral rounded-xl p-6 shadow-md border border-primary/30 flex flex-col h-full">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-line-chart text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">乡税易兴</h3>
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <span class="service-tag">融资对接</span>
+                        <span class="service-tag">品牌认证</span>
+                        <span class="service-tag">产业规划</span>
+                    </div>
+                    <p class="text-dark/70 mb-6 flex-grow">
+                        以税务合规为基础，帮助您对接税务信用融资渠道，辅助品牌认证和标准化建设，
+                        提供产业发展数据支撑，让税务服务成为您扩大经营、提升效益的有力支撑。
+                    </p>
+                    <div class="flex items-center text-accent hover:text-accent/80 transition-colors mt-auto">
+                        <span>了解服务</span>
+                        <i class="fa fa-arrow-right ml-2"></i>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- 服务保障提示 -->
+            <div class="mt-12 bg-primary/20 rounded-xl p-6 max-w-3xl mx-auto">
+                <div class="flex items-start gap-4">
+                    <i class="fa fa-shield text-accent text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-bold text-dark text-lg mb-2">服务保障</h4>
+                        <p class="text-dark/70">所有服务全程免费提供，政策解读实时更新，操作指导覆盖全流程，让您办税无忧、经营放心</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实用工具区域 -->
+    <section id="tools" class="py-16 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">实用工具包</h2>
+                <p class="text-dark/70 max-w-2xl mx-auto">轻量化整合+本土化适配，打造乡村友好型税务服务工具</p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="simple-web.html" class="card-hover bg-white rounded-xl p-5 shadow-sm border border-primary/20">
+                    <i class="fa fa-globe text-accent text-2xl mb-3"></i>
+                    <h3 class="font-bold text-dark mb-2">极简办税网页</h3>
+                    <p class="text-dark/60 text-sm">适配乡村场景，操作流程简化，支持弱网使用</p>
+                </a>
+                
+                <a href="guide-manual.html" class="card-hover bg-white rounded-xl p-5 shadow-sm border border-primary/20">
+                    <i class="fa fa-book text-accent text-2xl mb-3"></i>
+                    <h3 class="font-bold text-dark mb-2">操作指南手册</h3>
+                    <p class="text-dark/60 text-sm">一步一图实操卡片，方言版动画教程</p>
+                </a>
+                
+                <a href="risk-warning.html" class="card-hover bg-white rounded-xl p-5 shadow-sm border border-primary/20">
+                    <i class="fa fa-exclamation-circle text-accent text-2xl mb-3"></i>
+                    <h3 class="font-bold text-dark mb-2">风险预警工具</h3>
+                    <p class="text-dark/60 text-sm">税务合规风险检测，实时提醒整改</p>
+                </a>
+                
+                <a href="policy-matching.html" class="card-hover bg-white rounded-xl p-5 shadow-sm border border-primary/20">
+                    <i class="fa fa-search text-accent text-2xl mb-3"></i>
+                    <h3 class="font-bold text-dark mb-2">政策匹配查询</h3>
+                    <p class="text-dark/60 text-sm">精准匹配适用优惠政策，一键查看申报流程</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 政策查询区域 -->
+    <section id="policy" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">政策查询中心</h2>
+                <p class="text-dark/70 max-w-2xl mx-auto">分类整理涉农税收优惠政策，提供精准查询与解读服务</p>
+            </div>
+            
+            <div class="bg-neutral rounded-xl p-6 md:p-8 shadow-md border border-primary/30 max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-4 mb-6">
+                    <select class="flex-1 px-4 py-3 rounded-lg border border-secondary/50 bg-white text-dark">
+                        <option value="">全部政策类型</option>
+                        <option value="vat">增值税优惠</option>
+                        <option value="income-tax">所得税优惠</option>
+                        <option value="special">专项免税政策</option>
+                        <option value="startup">创业扶持政策</option>
+                    </select>
+                    <select class="flex-1 px-4 py-3 rounded-lg border border-secondary/50 bg-white text-dark">
+                        <option value="">全部经营类型</option>
+                        <option value="family">家庭经营类</option>
+                        <option value="coop">合作经营类</option>
+                        <option value="enterprise">企业经营类</option>
+                    </select>
+                    <button class="bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                        <i class="fa fa-search mr-2"></i> 搜索政策
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <a href="policy-detail.html" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-primary/20">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-dark">自产农产品免征增值税政策</h3>
+                                <p class="text-dark/60 text-sm mt-1">适用主体：家庭农场、农户 | 发布时间：2024-01-15</p>
+                            </div>
+                            <span class="bg-accent/10 text-accent text-xs px-2 py-1 rounded">增值税优惠</span>
+                        </div>
+                    </a>
+                    
+                    <a href="policy-detail.html" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-primary/20">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-dark">小微企业所得税减半征收政策</h3>
+                                <p class="text-dark/60 text-sm mt-1">适用主体：乡村小微企业 | 发布时间：2024-03-20</p>
+                            </div>
+                            <span class="bg-accent/10 text-accent text-xs px-2 py-1 rounded">所得税优惠</span>
+                        </div>
+                    </a>
+                    
+                    <a href="policy-detail.html" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-primary/20">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-dark">农民专业合作社税收优惠政策</h3>
+                                <p class="text-dark/60 text-sm mt-1">适用主体：合作经营类 | 发布时间：2024-02-10</p>
+                            </div>
+                            <span class="bg-accent/10 text-accent text-xs px-2 py-1 rounded">专项免税政策</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="text-center mt-6">
+                    <a href="policy-list.html" class="inline-block text-accent hover:text-accent/80 transition-colors font-medium">
+                        查看更多政策 <i class="fa fa-angle-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 辅导员对接区域 -->
+    <section id="counselor" class="py-16 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">本土辅导员对接</h2>
+                <p class="text-dark/70 max-w-2xl mx-auto">专业赋能队+本土辅导员队协同，打通服务落地最后一公里</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <img src="placeholder-counselor.png" alt="本土辅导员服务" class="w-full h-auto rounded-xl shadow-lg" />
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-map-marker text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-dark text-lg">村级辅导点查询</h3>
+                            <p class="text-dark/70">查找就近的村级税务辅导点，享受面对面咨询和手把手指导服务</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-user-o text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-dark text-lg">辅导员预约服务</h3>
+                            <p class="text-dark/70">预约本土辅导员上门服务，解决发票开具、申报纳税等实际问题</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-phone text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-dark text-lg">远程咨询通道</h3>
+                            <p class="text-dark/70">24小时响应申报期报错、政策疑问等紧急需求，电话+视频连线指导</p>
+                        </div>
+                    </div>
+                    
+                    <a href="counselor-list.html" class="inline-block bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                        <i class="fa fa-list mr-2"></i> 查看辅导员列表
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 平台介绍区域 - 优化版 -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">关于乡税智枢平台</h2>
+                <p class="text-dark/70 max-w-2xl mx-auto">专为乡村经营主体打造的一站式税务服务平台，让税务服务更贴近农村、更便捷高效</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-dark">平台定位</h3>
+                    <p class="text-dark/70">
+                        乡税智枢是面向家庭农场、农民专业合作社、乡村企业等经营主体的公益性税务服务平台。
+                        我们聚焦乡村办税痛点难点，通过本土化、通俗化、便捷化的服务设计，
+                        让农村群众不用进城就能享受到专业的税务服务，真正实现"办税不出村、服务零距离"。
+                    </p>
+                    
+                    <h3 class="text-xl font-bold text-dark">我们的承诺</h3>
+                    <ul class="space-y-3 text-dark/70">
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check-circle text-accent mt-1"></i>
+                            <span>所有核心服务永久免费，不收取任何咨询费、指导费</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check-circle text-accent mt-1"></i>
+                            <span>政策解读及时准确，同步最新税收优惠政策信息</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check-circle text-accent mt-1"></i>
+                            <span>操作指导通俗易懂，适配农村群众使用习惯</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check-circle text-accent mt-1"></i>
+                            <span>服务响应及时高效，申报期提供7×24小时咨询支持</span>
+                        </li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-bold text-dark">服务覆盖</h3>
+                    <p class="text-dark/70 mb-4">
+                        目前已覆盖陕西省西安市周边20个乡镇、150个行政村，
+                        拥有30名专业税务顾问和50名本土辅导员，累计服务乡村经营主体超过2000家。
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="contact.html" class="inline-block bg-accent hover:bg-accent/90 text-white px-5 py-2 rounded-lg font-medium transition-colors text-sm">
+                            <i class="fa fa-phone mr-1"></i> 联系我们
+                        </a>
+                        <a href="feedback.html" class="inline-block bg-white hover:bg-white/90 text-accent border border-accent px-5 py-2 rounded-lg font-medium transition-colors text-sm">
+                            <i class="fa fa-comment-o mr-1"></i> 意见反馈
+                        </a>
+                        <a href="faq.html" class="inline-block bg-white hover:bg-white/90 text-accent border border-accent px-5 py-2 rounded-lg font-medium transition-colors text-sm">
+                            <i class="fa fa-question-circle-o mr-1"></i> 常见问题
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <img src="placeholder-about.png" alt="乡税智枢平台服务" class="w-full h-auto rounded-xl shadow-lg" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部区域 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa fa-home text-primary"></i>
+                        <span>乡税智枢</span>
+                    </h3>
+                    <p class="text-white/70 mb-4">乡村智慧税务服务平台，让税务服务更贴近乡村、更便捷高效</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white/70 hover:text-primary transition-colors">首页</a></li>
+                        <li><a href="核心服务.html" class="text-white/70 hover:text-primary transition-colors">核心服务</a></li>
+                        <li><a href="实用工具.html" class="text-white/70 hover:text-primary transition-colors">实用工具</a></li>
+                        <li><a href="政策查询.html" class="text-white/70 hover:text-primary transition-colors">政策查询</a></li>
+                        <li><a href="辅导员对接.html" class="text-white/70 hover:text-primary transition-colors">辅导员对接</a></li>
+                        <li><a href="关于我们.html" class="text-white/70 hover:text-primary transition-colors">关于我们</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">服务支持</h4>
+                    <ul class="space-y-2">
+                        <li><a href="faq.html" class="text-white/70 hover:text-primary transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-white/70 hover:text-primary transition-colors">意见反馈</a></li>
+                        <li><a href="service-terms.html" class="text-white/70 hover:text-primary transition-colors">服务条款</a></li>
+                        <li><a href="privacy.html" class="text-white/70 hover:text-primary transition-colors">隐私政策</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">联系我们</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-envelope-o"></i>
+                            <span>service@xiangshuizhishu.com</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-map-marker"></i>
+                            <span>陕西省西安市西京学院会计学院</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
+                <p>© 2025 乡税智枢 - 乡村智慧税务服务平台 版权所有 | 陕ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-accent hover:bg-accent/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') 
+                ? '<i class="fa fa-bars"></i>' 
+                : '<i class="fa fa-times"></i>';
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') {
+                    // 首页链接，直接滚动到顶部
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>辅导员对接 - 乡税智枢</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E6D2A7', // 米色主色调
+                        secondary: '#D4B483', // 浅棕色辅助色
+                        accent: '#C28E5D', // 暖棕色强调色
+                        neutral: '#F9F5EF', // 浅米色背景
+                        dark: '#7D5A3F', // 深棕色文字
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .counselor-btn {
+                @apply bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm md:text-base;
+            }
+            .counselor-card {
+                @apply bg-white rounded-xl p-5 shadow-md border border-primary/30 transition-all hover:shadow-lg;
+            }
+            .service-tag {
+                @apply bg-accent/10 text-accent text-xs px-2 py-1 rounded-full inline-block mt-1 mr-2;
+            }
+            .nav-active {
+                @apply text-accent font-medium;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral text-dark font-sans">
+    <!-- 完整导航栏（保留，与整体风格统一） -->
+    <header class="sticky top-0 z-50 bg-primary/95 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <i class="fa fa-home text-accent text-2xl"></i>
+                <span class="text-xl font-bold text-dark">乡税智枢</span>
+            </a>
+            
+            <!-- 桌面端导航（标注当前页） -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="text-dark hover:text-accent transition-colors">首页</a>
+                <a href="核心服务.html" class="text-dark hover:text-accent transition-colors">核心服务</a>
+                <a href="实用工具.html" class="text-dark hover:text-accent transition-colors">实用工具</a>
+                <a href="政策查询.html" class="text-dark hover:text-accent transition-colors">政策查询</a>
+                <a href="辅导员对接.html" class="nav-active">辅导员对接</a>
+                <a href="关于我们.html" class="text-dark hover:text-accent transition-colors">关于我们</a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-dark text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单（完整保留） -->
+        <div id="mobileMenu" class="md:hidden hidden bg-primary border-t border-secondary/30">
+            <div class="container mx-auto px-4 py-2 flex flex-col gap-3">
+                <a href="index.html" class="py-2 text-dark hover:text-accent transition-colors">首页</a>
+                <a href="核心服务.html" class="py-2 text-dark hover:text-accent transition-colors">核心服务</a>
+                <a href="实用工具.html" class="py-2 text-dark hover:text-accent transition-colors">实用工具</a>
+                <a href="政策查询.html" class="py-2 text-dark hover:text-accent transition-colors">政策查询</a>
+                <a href="辅导员对接.html" class="py-2 nav-active">辅导员对接</a>
+                <a href="关于我们.html" class="py-2 text-dark hover:text-accent transition-colors">关于我们</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 面包屑导航（保留，增强连贯性） -->
+    <section class="bg-white py-4 border-b border-primary/30">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-dark/70">
+                <a href="index.html" class="hover:text-accent transition-colors">首页</a>
+                <i class="fa fa-angle-right mx-2 text-accent"></i>
+                <span class="text-accent">辅导员对接</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 辅导员对接核心入口（首屏直达，直接能用） -->
+    <section class="py-8 bg-gradient-to-b from-primary to-neutral">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-6">
+                <h2 class="text-[clamp(1.5rem,3vw,1.8rem)] font-bold text-dark mb-2">找辅导员：上门教、远程帮，办税难题不用愁</h2>
+                <p class="text-dark/70 text-sm md:text-base">村会计、致富带头人当辅导员，懂农活、会办税，用家乡话教你操作</p>
+            </div>
+
+            <!-- 三大核心服务入口（快速操作） -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-8">
+                <a href="#search-counselor" class="counselor-card flex flex-col items-center text-center p-4">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fa fa-map-marker text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-dark mb-2">找附近辅导员</h3>
+                    <p class="text-dark/70 text-xs">按乡镇查村级辅导点，就近解决问题</p>
+                </a>
+                <a href="#book-service" class="counselor-card flex flex-col items-center text-center p-4">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fa fa-calendar-check-o text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-dark mb-2">预约上门服务</h3>
+                    <p class="text-dark/70 text-xs">教开票、理账目，农忙时也能约</p>
+                </a>
+                <a href="#remote-consult" class="counselor-card flex flex-col items-center text-center p-4">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fa fa-video-camera text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-dark mb-2">远程视频咨询</h3>
+                    <p class="text-dark/70 text-xs">24小时响应，申报期报错随时问</p>
+                </a>
+            </div>
+
+            <!-- 紧急咨询条（突出显示） -->
+            <div class="bg-accent text-white p-4 rounded-xl max-w-3xl mx-auto flex flex-wrap items-center justify-between">
+                <div class="flex items-center gap-2 mb-2 md:mb-0">
+                    <i class="fa fa-phone text-xl"></i>
+                    <div>
+                        <p class="text-sm">申报期紧急求助</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. 村级辅导点查询（按乡镇找，直接定位） -->
+    <section id="search-counselor" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="mb-8">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3 flex items-center gap-2">
+                    <i class="fa fa-map-marker text-accent"></i> 找村级辅导点
+                </h2>
+                <p class="text-dark/70 text-sm">选择你所在的乡镇，就能看到附近的辅导点地址和辅导员联系方式</p>
+            </div>
+
+            <!-- 乡镇筛选+辅导点列表 -->
+            <div class="max-w-3xl mx-auto">
+                <!-- 乡镇筛选 -->
+                <div class="bg-neutral p-4 rounded-xl border border-primary/30 mb-6">
+                    <select id="town-select" class="w-full px-4 py-3 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                        <option value="">选择你所在的乡镇</option>
+                        <option value="hanwang">汉王镇</option>
+                        <option value="yangxian">洋县</option>
+                        <option value="chenggu">城固县</option>
+                        <option value="mianxian">勉县</option>
+                        <option value="xixiang">西乡县</option>
+                    </select>
+                </div>
+
+                <!-- 辅导点列表（默认显示汉王镇，筛选后切换） -->
+                <div class="space-y-4">
+                    <!-- 汉王镇繁荣村辅导点 -->
+                    <div class="counselor-card">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-dark">汉王镇繁荣村辅导点</h3>
+                                <p class="text-dark/70 text-sm">地址：繁荣村党群服务中心1楼大厅</p>
+                            </div>
+                            <span class="service-tag">可上门</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4 mb-3">
+                            <div>
+                                <p class="text-dark/60 text-xs mb-1">辅导员：张会计</p>
+                                <p class="text-dark text-sm">（方言：汉中话）</p>
+                            </div>
+                            <div>
+                                <p class="text-dark/60 text-xs mb-1">服务时间</p>
+                                <p class="text-dark text-sm">周一至周五 8:30-17:00</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="#book-service" class="bg-white hover:bg-white/90 text-accent border border-accent px-3 py-1.5 rounded-lg font-medium transition-colors text-xs flex items-center justify-center gap-1">
+                                <i class="fa fa-calendar"></i> 约服务
+                            </a>
+                            <a href="https://uri.amap.com/marker?position=107.086,33.078" target="_blank" class="bg-white hover:bg-white/90 text-accent border border-accent px-3 py-1.5 rounded-lg font-medium transition-colors text-xs flex items-center justify-center gap-1">
+                                <i class="fa fa-map"></i> 导航去
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 汉王镇红星村辅导点 -->
+                    <div class="counselor-card">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-dark">汉王镇红星村辅导点</h3>
+                                <p class="text-dark/70 text-sm">地址：红星村村委会旁便民服务站</p>
+                            </div>
+                            <span class="service-tag">可上门</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4 mb-3">
+                            <div>
+                                <p class="text-dark/60 text-xs mb-1">辅导员：李致富</p>
+                                <p class="text-dark text-sm">（方言：汉中话）</p>
+                            </div>
+                            <div>
+                                <p class="text-dark/60 text-xs mb-1">服务时间</p>
+                                <p class="text-dark text-sm">周一至周五 9:00-16:30</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="#book-service" class="bg-white hover:bg-white/90 text-accent border border-accent px-3 py-1.5 rounded-lg font-medium transition-colors text-xs flex items-center justify-center gap-1">
+                                <i class="fa fa-calendar"></i> 约服务
+                            </a>
+                            <a href="https://uri.amap.com/marker?position=107.102,33.065" target="_blank" class="bg-white hover:bg-white/90 text-accent border border-accent px-3 py-1.5 rounded-lg font-medium transition-colors text-xs flex items-center justify-center gap-1">
+                                <i class="fa fa-map"></i> 导航去
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 辅导员预约服务（步骤清晰，直接预约） -->
+    <section id="book-service" class="py-12 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">预约辅导员上门服务</h2>
+                <p class="text-dark/70 text-sm max-w-2xl mx-auto">选择服务类型、时间，辅导员会提前联系你确认，农忙时节可优先安排</p>
+            </div>
+
+            <!-- 预约表单（核心功能，简化步骤） -->
+            <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-md border border-primary/30">
+                <form>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-dark/70 text-xs mb-1">你的姓名</label>
+                            <input type="text" placeholder="请输入你的姓名" class="w-full px-3 py-2 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-dark/70 text-xs mb-1">联系电话</label>
+                            <input type="tel" placeholder="请输入手机号" class="w-full px-3 py-2 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-dark/70 text-xs mb-1">所在乡镇/村</label>
+                            <select class="w-full px-3 py-2 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                                <option value="">选择乡镇</option>
+                                <option value="hanwang">汉王镇</option>
+                                <option value="yangxian">洋县</option>
+                                <option value="chenggu">城固县</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-dark/70 text-xs mb-1">经营类型</label>
+                            <select class="w-full px-3 py-2 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                                <option value="">选择你的经营类型</option>
+                                <option value="family">农户/家庭农场</option>
+                                <option value="coop">合作社</option>
+                                <option value="enterprise">农业企业</option>
+                                <option value="individual">个体工商户</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-dark/70 text-xs mb-1">需要的服务（可多选）</label>
+                        <div class="flex flex-wrap gap-2">
+                            <label class="flex items-center gap-1 bg-neutral px-3 py-2 rounded-lg border border-primary/30 cursor-pointer">
+                                <input type="checkbox" class="text-accent">
+                                <span class="text-sm">手机开票教学</span>
+                            </label>
+                            <label class="flex items-center gap-1 bg-neutral px-3 py-2 rounded-lg border border-primary/30 cursor-pointer">
+                                <input type="checkbox" class="text-accent">
+                                <span class="text-sm">免税政策梳理</span>
+                            </label>
+                            <label class="flex items-center gap-1 bg-neutral px-3 py-2 rounded-lg border border-primary/30 cursor-pointer">
+                                <input type="checkbox" class="text-accent">
+                                <span class="text-sm">财务账目整理</span>
+                            </label>
+                            <label class="flex items-center gap-1 bg-neutral px-3 py-2 rounded-lg border border-primary/30 cursor-pointer">
+                                <input type="checkbox" class="text-accent">
+                                <span class="text-sm">申报报错处理</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-dark/70 text-xs mb-1">预约日期</label>
+                            <input type="date" class="w-full px-3 py-2 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-dark/70 text-xs mb-1">预约时段</label>
+                            <select class="w-full px-3 py-2 rounded-lg border border-secondary/50 focus:outline-none focus:border-accent text-sm">
+                                <option value="">选择时段</option>
+                                <option value="morning">上午 9:00-12:00</option>
+                                <option value="afternoon">下午 14:00-17:00</option>
+                                <option value="evening">傍晚 17:00-19:00（农忙专属）</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="counselor-btn w-full">
+                        <i class="fa fa-paper-plane"></i> 提交预约
+                    </button>
+                    <p class="text-dark/60 text-xs text-center mt-3">提交后1小时内，辅导员会电话联系你确认</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 远程咨询通道（24小时响应，直接使用） -->
+    <section id="remote-consult" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">远程咨询通道</h2>
+                <p class="text-dark/70 text-sm max-w-2xl mx-auto">不用跑辅导点，电话、视频就能问，申报期24小时有人接</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                <!-- 电话咨询 -->
+                <div class="counselor-card flex flex-col items-center text-center p-5">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-phone text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-dark mb-2">电话咨询</h3>
+                    <p class="text-dark/70 text-sm mb-4">申报期紧急问题，电话直接问，支持方言沟通</p>
+                    <p class="text-dark/60 text-xs mt-3">服务时间：申报期 24小时 | 非申报期 8:30-17:30</p>
+                </div>
+
+                <!-- 视频咨询 -->
+                <div class="counselor-card flex flex-col items-center text-center p-5">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-video-camera text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-dark mb-2">视频咨询</h3>
+                    <p class="text-dark/70 text-sm mb-4">屏幕共享教操作，报错界面拍给辅导员看，快速解决</p>
+                    <button class="bg-accent/10 text-accent px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 w-full">
+                        <i class="fa fa-plus"></i> 发起视频咨询
+                    </button>
+                    <p class="text-dark/60 text-xs mt-3">提示：需提前添加辅导员企业微信（扫码下方二维码）</p>
+                    <div class="mt-3 w-24 h-24 bg-white p-1 rounded-lg border border-primary/30 mx-auto">
+                        <img src="placeholder-qrcode.png" alt="企业微信二维码" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 辅导员风采（增加信任，展示本土属性） -->
+    <section class="py-12 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">认识你的本土辅导员</h2>
+                <p class="text-dark/70 text-sm">他们是村会计、致富带头人，懂农活、会办税，用家乡话帮你解决问题</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <!-- 辅导员1 -->
+                <div class="counselor-card text-center">
+                    <div class="w-24 h-24 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                        <img src="placeholder-counselor1.png" alt="张会计" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-dark mb-1">张会计</h3>
+                    <p class="text-dark/70 text-xs mb-2">汉王镇繁荣村 | 汉中话</p>
+                    <p class="text-dark/60 text-xs mb-3">擅长：合作社账目整理、免税备案</p>
+                </div>
+
+                <!-- 辅导员2 -->
+                <div class="counselor-card text-center">
+                    <div class="w-24 h-24 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                        <img src="placeholder-counselor2.png" alt="李致富" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-dark mb-1">李致富</h3>
+                    <p class="text-dark/70 text-xs mb-2">汉王镇红星村 | 汉中话</p>
+                    <p class="text-dark/60 text-xs mb-3">擅长：手机开票、农户免税政策</p>
+                </div>
+
+                <!-- 辅导员3 -->
+                <div class="counselor-card text-center">
+                    <div class="w-24 h-24 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                        <img src="placeholder-counselor3.png" alt="王大姐" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-dark mb-1">王大姐</h3>
+                    <p class="text-dark/70 text-xs mb-2">洋县谢村镇 | 洋县话</p>
+                    <p class="text-dark/60 text-xs mb-3">擅长：家庭农场申报、农机抵税</p>
+                </div>
+
+                <!-- 辅导员4 -->
+                <div class="counselor-card text-center">
+                    <div class="w-24 h-24 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                        <img src="placeholder-counselor4.png" alt="赵大哥" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-dark mb-1">赵大哥</h3>
+                    <p class="text-dark/70 text-xs mb-2">城固县博望镇 | 城固话</p>
+                    <p class="text-dark/60 text-xs mb-3">擅长：企业合规诊断、信用贷对接</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="counselor-list.html" class="inline-block bg-white hover:bg-white/90 text-accent border border-accent px-5 py-2 rounded-lg font-medium transition-colors">
+                    查看全部辅导员 <i class="fa fa-angle-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务常见问题（解决顾虑，直接解答） -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h2 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">关于辅导员服务的常见问题</h2>
+                <p class="text-dark/70 text-sm">这些问题大家问得多，提前了解，少跑冤枉路</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto space-y-4">
+                <div class="bg-neutral p-4 rounded-lg border border-primary/30">
+                    <h3 class="font-bold text-dark text-sm mb-2 flex items-center gap-2">
+                        <i class="fa fa-question-circle text-accent"></i> 辅导员服务收费吗？
+                    </h3>
+                    <p class="text-dark/70 text-sm">不收费！基础服务（开票教学、政策讲解、账目梳理）全部免费，不会以任何名义收钱</p>
+                </div>
+
+                <div class="bg-neutral p-4 rounded-lg border border-primary/30">
+                    <h3 class="font-bold text-dark text-sm mb-2 flex items-center gap-2">
+                        <i class="fa fa-question-circle text-accent"></i> 农忙时能约到辅导员吗？
+                    </h3>
+                    <p class="text-dark/70 text-sm">可以！农忙时节会优先安排辅导员上门，也可以预约傍晚时段，不耽误农活</p>
+                </div>
+
+                <div class="bg-neutral p-4 rounded-lg border border-primary/30">
+                    <h3 class="font-bold text-dark text-sm mb-2 flex items-center gap-2">
+                        <i class="fa fa-question-circle text-accent"></i> 听不懂普通话，能找说方言的辅导员吗？
+                    </h3>
+                    <p class="text-dark/70 text-sm">可以！每个辅导点的辅导员都能说本地方言（如汉中话、洋县话），预约时可备注方言需求</p>
+                </div>
+
+                <div class="bg-neutral p-4 rounded-lg border border-primary/30">
+                    <h3 class="font-bold text-dark text-sm mb-2 flex items-center gap-2">
+                        <i class="fa fa-question-circle text-accent"></i> 提交预约后，多久能收到回复？
+                    </h3>
+                    <p class="text-dark/70 text-sm">1小时内！工作日提交预约后，辅导员会电话联系你确认时间；非工作日会在次日上午回复</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 紧急咨询入口（固定底部，随时求助） -->
+    <div class="fixed bottom-0 left-0 right-0 bg-accent text-white py-3 shadow-lg z-40">
+        <div class="container mx-auto px-4 flex flex-wrap items-center justify-between">
+            <div class="flex items-center gap-2 mb-2 md:mb-0">
+                <i class="fa fa-question-circle text-xl"></i>
+                <div>
+                    <p class="text-sm">办税遇难题？找辅导员</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-20 right-6 bg-dark hover:bg-dark/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible z-30">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- 底部区域（完整保留） -->
+    <footer class="bg-dark text-white py-12 pt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa fa-home text-primary"></i>
+                        <span>乡税智枢</span>
+                    </h3>
+                    <p class="text-white/70 mb-4">乡村智慧税务服务平台，让税务服务更贴近乡村、更便捷高效</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white/70 hover:text-primary transition-colors">首页</a></li>
+                        <li><a href="核心服务.html" class="text-white/70 hover:text-primary transition-colors">核心服务</a></li>
+                        <li><a href="实用工具.html" class="text-white/70 hover:text-primary transition-colors">实用工具</a></li>
+                        <li><a href="政策查询.html" class="text-white/70 hover:text-primary transition-colors">政策查询</a></li>
+                        <li><a href="辅导员对接.html" class="text-white/70 hover:text-primary transition-colors">辅导员对接</a></li>
+                        <li><a href="关于我们.html" class="text-white/70 hover:text-primary transition-colors">关于我们</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">服务支持</h4>
+                    <ul class="space-y-2">
+                        <li><a href="faq.html" class="text-white/70 hover:text-primary transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-white/70 hover:text-primary transition-colors">意见反馈</a></li>
+                        <li><a href="service-terms.html" class="text-white/70 hover:text-primary transition-colors">服务条款</a></li>
+                        <li><a href="privacy.html" class="text-white/70 hover:text-primary transition-colors">隐私政策</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">联系我们</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-envelope-o"></i>
+                            <span>service@xiangshuizhishu.com</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-map-marker"></i>
+                            <span>陕西省西安市西京学院会计学院</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
+                <p>© 2025 乡税智枢 - 乡村智慧税务服务平台 版权所有 | 陕ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') 
+                ? '<i class="fa fa-bars"></i>' 
+                : '<i class="fa fa-times"></i>';
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 乡镇筛选逻辑（模拟）
+        const townSelect = document.getElementById('town-select');
+        townSelect.addEventListener('change', () => {
+            // 实际项目中可根据选择的乡镇加载对应辅导点列表
+            alert(`已筛选 ${townSelect.options[townSelect.selectedIndex].text} 的辅导点，实际项目中会显示对应列表`);
+        });
+        
+        // 平滑滚动（锚点跳转）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
+                    }
+                    
+                    // 计算目标位置（避开底部固定栏）
+                    const targetTop = targetElement.offsetTop - 80;
+                    window.scrollTo({
+                        top: targetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

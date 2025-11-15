@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 乡税智枢</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E6D2A7', // 米色主色调
+                        secondary: '#D4B483', // 浅棕色辅助色
+                        accent: '#C28E5D', // 暖棕色强调色
+                        neutral: '#F9F5EF', // 浅米色背景
+                        dark: '#7D5A3F', // 深棕色文字
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .about-btn {
+                @apply bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm md:text-base;
+            }
+            .about-card {
+                @apply bg-white rounded-xl p-5 shadow-md border border-primary/30 transition-all hover:shadow-lg;
+            }
+            .nav-active {
+                @apply text-accent font-medium;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral text-dark font-sans">
+    <!-- 完整导航栏（保留，与整体风格统一） -->
+    <header class="sticky top-0 z-50 bg-primary/95 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <i class="fa fa-home text-accent text-2xl"></i>
+                <span class="text-xl font-bold text-dark">乡税智枢</span>
+            </a>
+            
+            <!-- 桌面端导航（标注当前页） -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="text-dark hover:text-accent transition-colors">首页</a>
+                <a href="核心服务.html" class="text-dark hover:text-accent transition-colors">核心服务</a>
+                <a href="实用工具.html" class="text-dark hover:text-accent transition-colors">实用工具</a>
+                <a href="政策查询.html" class="text-dark hover:text-accent transition-colors">政策查询</a>
+                <a href="辅导员对接.html" class="text-dark hover:text-accent transition-colors">辅导员对接</a>
+                <a href="关于我们.html" class="nav-active">关于我们</a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-dark text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单（完整保留） -->
+        <div id="mobileMenu" class="md:hidden hidden bg-primary border-t border-secondary/30">
+            <div class="container mx-auto px-4 py-2 flex flex-col gap-3">
+                <a href="index.html" class="py-2 text-dark hover:text-accent transition-colors">首页</a>
+                <a href="核心服务.html" class="py-2 text-dark hover:text-accent transition-colors">核心服务</a>
+                <a href="实用工具.html" class="py-2 text-dark hover:text-accent transition-colors">实用工具</a>
+                <a href="政策查询.html" class="py-2 text-dark hover:text-accent transition-colors">政策查询</a>
+                <a href="辅导员对接.html" class="py-2 text-dark hover:text-accent transition-colors">辅导员对接</a>
+                <a href="关于我们.html" class="py-2 nav-active">关于我们</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 面包屑导航（保留，增强连贯性） -->
+    <section class="bg-white py-4 border-b border-primary/30">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-dark/70">
+                <a href="index.html" class="hover:text-accent transition-colors">首页</a>
+                <i class="fa fa-angle-right mx-2 text-accent"></i>
+                <span class="text-accent">关于我们</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心介绍（简洁直白，讲清“我们是谁”） -->
+    <section class="py-10 bg-gradient-to-b from-primary to-neutral">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-[clamp(1.5rem,3vw,1.8rem)] font-bold text-dark mb-3">乡税智枢：为乡村办税量身打造</h2>
+            <p class="text-dark/70 text-sm md:text-base max-w-2xl mx-auto mb-8">我们是由税务部门指导、高校支持的乡村税务服务平台，专门解决农民、合作社、乡村企业办税难的问题</p>
+            
+            <div class="max-w-md mx-auto">
+                <a href="index.html" class="about-btn w-full">
+                    <i class="fa fa-home"></i> 回到首页使用服务
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我们的优势（3点核心，突出靠谱性） -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h3 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">为什么选我们？</h3>
+                <p class="text-dark/70 text-sm">3大保障，让你办税放心、省心、舒心</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="about-card text-center">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-shield text-accent text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">官方指导 靠谱放心</h4>
+                    <p class="text-dark/70 text-sm">税务部门全程指导，政策解读准确、办税流程规范，不误导、不跑偏</p>
+                </div>
+                
+                <div class="about-card text-center">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-users text-accent text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">本土团队 懂你所需</h4>
+                    <p class="text-dark/70 text-sm">辅导员都是本村本地人，懂农活、会方言、知政策，沟通无障碍</p>
+                </div>
+                
+                <div class="about-card text-center">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-heart-o text-accent text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">全程免费 无隐形消费</h4>
+                    <p class="text-dark/70 text-sm">所有服务（咨询、辅导、工具使用）全部免费，不收取任何手续费</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作支持（增强信任，展示背书） -->
+    <section class="py-12 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h3 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">支持与合作</h3>
+                <p class="text-dark/70 text-sm">有这些单位支持，服务更有保障</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-primary/30 w-full text-center">
+                    <p class="text-dark font-medium">当地税务局</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-primary/30 w-full text-center">
+                    <p class="text-dark font-medium">乡镇人民政府</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-primary/30 w-full text-center">
+                    <p class="text-dark font-medium">西京学院会计学院</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-primary/30 w-full text-center">
+                    <p class="text-dark font-medium">各村村委会</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心使命（简洁明了，传递价值） -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <div class="text-center mb-8">
+                <h3 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">我们的使命</h3>
+            </div>
+
+            <div class="about-card text-center">
+                <i class="fa fa-lightbulb-o text-accent text-3xl mb-4"></i>
+                <p class="text-dark/80 text-base leading-relaxed">
+                    让乡村税务服务“接地气、不绕弯、零门槛”，让每一位乡村经营者都能懂政策、会办税、享优惠，不用为税务问题分心，专心搞生产、谋发展
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们（实用导向，有问题能找到人） -->
+    <section class="py-12 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h3 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">联系我们</h3>
+                <p class="text-dark/70 text-sm">合作咨询、意见反馈、投诉建议，都能找到我们</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                <div class="about-card flex flex-col items-center text-center p-5">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-phone text-accent text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">紧急咨询</h4>
+                    <p class="text-dark/70 text-xs">7×24小时响应</p>
+                </div>
+                
+                <div class="about-card flex flex-col items-center text-center p-5">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-envelope-o text-accent text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">意见反馈</h4>
+                    <p class="text-dark text-sm mb-3">service@xiangshuizhishu.com</p>
+                    <p class="text-dark/70 text-xs">1-2个工作日回复</p>
+                    <a href="mailto:service@xiangshuizhishu.com" class="mt-3 bg-accent/10 text-accent px-3 py-1.5 rounded-lg text-sm">发送邮件</a>
+                </div>
+                
+                <div class="about-card flex flex-col items-center text-center p-5">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-map-marker text-accent text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">办公地址</h4>
+                    <p class="text-dark text-sm mb-3">陕西省西安市西京学院会计学院</p>
+                    <p class="text-dark/70 text-xs">工作日 8:30-17:30</p>
+                    <a href="https://uri.amap.com/marker?position=108.927,34.157" target="_blank" class="mt-3 bg-accent/10 text-accent px-3 py-1.5 rounded-lg text-sm">导航前往</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速功能入口（回归使用，不脱离核心） -->
+    <section class="py-10 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="mb-8 text-center">
+                <h3 class="text-[clamp(1.4rem,3vw,1.6rem)] font-bold text-dark mb-3">需要办业务？直接用这些功能</h3>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                <a href="policy.html" class="about-card flex flex-col items-center text-center p-4">
+                    <i class="fa fa-file-text-o text-accent text-2xl mb-3"></i>
+                    <h4 class="font-medium text-dark text-sm">政策查询</h4>
+                </a>
+                <a href="counselor.html" class="about-card flex flex-col items-center text-center p-4">
+                    <i class="fa fa-user-o text-accent text-2xl mb-3"></i>
+                    <h4 class="font-medium text-dark text-sm">辅导员对接</h4>
+                </a>
+                <a href="tools.html" class="about-card flex flex-col items-center text-center p-4">
+                    <i class="fa fa-calculator text-accent text-2xl mb-3"></i>
+                    <h4 class="font-medium text-dark text-sm">实用工具</h4>
+                </a>
+                <a href="service.html" class="about-card flex flex-col items-center text-center p-4">
+                    <i class="fa fa-handshake-o text-accent text-2xl mb-3"></i>
+                    <h4 class="font-medium text-dark text-sm">核心服务</h4>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-20 right-6 bg-dark hover:bg-dark/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible z-30">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- 底部区域（完整保留） -->
+    <footer class="bg-dark text-white py-12 pt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa fa-home text-primary"></i>
+                        <span>乡税智枢</span>
+                    </h3>
+                    <p class="text-white/70 mb-4">乡村智慧税务服务平台，让税务服务更贴近乡村、更便捷高效</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white/70 hover:text-primary transition-colors">首页</a></li>
+                        <li><a href="核心服务.html" class="text-white/70 hover:text-primary transition-colors">核心服务</a></li>
+                        <li><a href="实用工具.html" class="text-white/70 hover:text-primary transition-colors">实用工具</a></li>
+                        <li><a href="政策查询.html" class="text-white/70 hover:text-primary transition-colors">政策查询</a></li>
+                        <li><a href="辅导员对接.html" class="text-white/70 hover:text-primary transition-colors">辅导员对接</a></li>
+                        <li><a href="关于我们.html" class="text-white/70 hover:text-primary transition-colors">关于我们</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">服务支持</h4>
+                    <ul class="space-y-2">
+                        <li><a href="faq.html" class="text-white/70 hover:text-primary transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-white/70 hover:text-primary transition-colors">意见反馈</a></li>
+                        <li><a href="service-terms.html" class="text-white/70 hover:text-primary transition-colors">服务条款</a></li>
+                        <li><a href="privacy.html" class="text-white/70 hover:text-primary transition-colors">隐私政策</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">联系我们</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-envelope-o"></i>
+                            <span>service@xiangshuizhishu.com</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-white/70">
+                            <i class="fa fa-map-marker"></i>
+                            <span>陕西省西安市西京学院会计学院</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
+                <p>© 2025 乡税智枢 - 乡村智慧税务服务平台 版权所有 | 陕ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') 
+                ? '<i class="fa fa-bars"></i>' 
+                : '<i class="fa fa-times"></i>';
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动（锚点跳转）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
+                    }
+                    
+                    // 计算目标位置（避开底部固定栏）
+                    const targetTop = targetElement.offsetTop - 80;
+                    window.scrollTo({
+                        top: targetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
